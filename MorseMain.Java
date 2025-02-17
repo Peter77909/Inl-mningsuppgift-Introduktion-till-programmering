@@ -14,7 +14,7 @@ class MorseConverter {
                 {"K", "-.-"}, {"L", ".-.."}, {"M", "--"}, {"N", "-."}, {"O", "---"},
                 {"P", ".--."}, {"Q", "--.-"}, {"R", ".-."}, {"S", "..."}, {"T", "-"},
                 {"U", "..-"}, {"V", "...-"}, {"W", ".--"}, {"X", "-..-"}, {"Y", "-.--"},
-                {"Z", "--.."}
+                {"Z", "--.."}, {" ", "/"} // Mellanslag hantering
         };
 
         for (String[] entry : morseArray) {
@@ -46,7 +46,7 @@ class MorseConverter {
                 throw new IllegalArgumentException("Ogiltig morsekod: " + letter);
             }
         }
-        return text.toString();
+        return text.toString().replace("/", " "); // Återställ mellanslag
     }
 }
 
@@ -62,7 +62,8 @@ public class MorseMain {
         String input = scanner.nextLine();
 
         try {
-            System.out.println(choice == 1 ? "Morsekod: " + MorseConverter.textToMorse(input) : "Text: " + MorseConverter.morseToText(input));
+            String output = (choice == 1) ? MorseConverter.textToMorse(input) : MorseConverter.morseToText(input);
+            System.out.println(choice == 1 ? "Morsekod: " + output : "Text: " + output);
         } catch (IllegalArgumentException e) {
             System.out.println("Fel: " + e.getMessage());
         }

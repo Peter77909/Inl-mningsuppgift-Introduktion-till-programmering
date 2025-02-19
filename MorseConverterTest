@@ -1,0 +1,32 @@
+public class MorseConverterTest {
+ 
+    @Test
+    public void testTextToMorse_SingleWord() {
+        assertEquals(".... . .-.. .-.. ---", MorseConverter.textToMorse("hello"));
+    }
+ 
+    @Test
+    public void testTextToMorse_MultipleWords() {
+        assertEquals(".... . .-.. .-.. --- / .-- --- .-. .-.. -.. / .... . .-.. .-.. ---", 
+                     MorseConverter.textToMorse("hello world hello"));
+    }
+ 
+    @Test
+    public void testMorseToText_SingleWord() {
+        assertEquals("HELLO", MorseConverter.morseToText(".... . .-.. .-.. ---"));
+    }
+ 
+    @Test
+    public void testMorseToText_MultipleWords() {
+        assertEquals("HELLO WORLD HELLO", 
+                     MorseConverter.morseToText(".... . .-.. .-.. --- / .-- --- .-. .-.. -.. / .... . .-.. .-.. ---"));
+    }
+ 
+    @Test
+    public void testInvalidCharacterInTextToMorse() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            MorseConverter.textToMorse("hello!");
+        });
+        assertTrue(exception.getMessage().contains("ogiltig bokstav"));
+    }
+}
